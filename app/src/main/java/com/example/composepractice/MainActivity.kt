@@ -4,44 +4,53 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.composepractice.ui.theme.ComposePracticeTheme
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import com.example.composepractice.ui.statusBarIndicators.StatusItem
+import com.example.composepractice.ui.statusBarIndicators.StatusBar
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            ComposePracticeTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+            Column(
+                modifier = Modifier
+                    .fillMaxHeight(),
+                verticalArrangement = Arrangement.Center
+            ) {
+                StatusBar(
+                    paddingStart = 30.dp,
+                    width = 500.dp,
+                    statuses = listOf(
+                        StatusItem(Color.Cyan, 1f),
+                        StatusItem(Color.LightGray, 4f),
+                        StatusItem(Color.Magenta, 5f)
                     )
-                }
+                )
+                StatusBar(
+                    height = 15.dp,
+                    paddingStart = 20.dp,
+                    statuses = listOf(
+                        StatusItem(Color.Cyan, 1f),
+                        StatusItem(Color.LightGray, 4f),
+                        StatusItem(Color.Magenta, 5f)
+                    )
+                )
+                StatusBar(
+                    roundStatus = 0.dp,
+                    statuses = listOf(
+                        StatusItem(Color.Cyan, 1f),
+                        StatusItem(Color.LightGray, 4f),
+                        StatusItem(Color.Magenta, 5f)
+                    )
+                )
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ComposePracticeTheme {
-        Greeting("Android")
-    }
-}
